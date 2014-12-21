@@ -4,10 +4,46 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        <link rel='stylesheet' href="{{ asset('bundles/DS/css/basestyle.css') }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <header>
+            <h1>DS Innovation</h1>
+            <ul>
+                <li><a href="/"><div class="menu">ACCUEIL</div></a></li>
+                <li><a href="#"><div class="menu">GALLERY</div></a></li>
+                <li><a href="#"><div class="menu">CONTACT</div></a></li>
+                <li><a href="#"><div class="menu">CONNEXION</div></a></li>
+            </ul>
+            <div class='clear'></div>
+        </header>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        
+        <footer>
+            <div class='affiche'>
+                <h3>CONTACT</h3>
+                <hr size="1px">
+                <p>Tel : 06.66.66.66.66</p>
+                <p>Email : contact@ds-innovation.com</p>
+            </div>
+            <div class='affiche'>
+                <h3>LE SALON</h3>
+                <hr size="1px">
+                <p>Adresse : 1 rue nationnale, Paris, 95000</p>
+                <p>10 coiffeurs disponibles à temps plein.</p>
+            </div>
+            <div class='affiche_last'>
+                <h3>HORRAIRES</h3>
+                <hr size="1px">
+                <p>Mardi : 9h à 12H et 14h à 19h<br />
+                Mercredi : 9h à 12H et 14h à 19h<br />
+                Jeudi : 9h à 12H et 14h à 19h<br />
+                Vendredi : 9h à 12H et 14h à 19h<br />
+                Sameci : 9h à 12H et 14h à 19h</p>
+            </div>
+            <div class="clear"></div>
+        </footer>
     </body>
 </html>

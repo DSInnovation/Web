@@ -1,0 +1,71 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}<link rel='stylesheet' href="{{ asset('bundles/DS/css/accueilstyle.css') }}" />{% endblock %}
+
+{% block body %} 
+    <section>
+        <div class='center'>
+            <div id='header_img'>
+                <h2>Un style <br />à <br />votre image</h2>
+            </div>
+            <!--<img class='img_page' src="{{ asset('bundles/DS/img/img_start.jpg') }}">-->
+        </div>
+        <div class='black block'>
+            <div class='center'>
+                <div class='affiche'>
+                    <h3>STYLE</h3>
+                    <hr size="1px"/>
+                    <div class="block_img">
+                        <img src="{{ asset('bundles/DS/img/affiche_1.jpg') }}">
+                    </div>
+                    <p>Parce que le style c'est la base. On se doit donc de respecter le style de chacun.
+                    De cette manière tout nos clients sont heureux de venir ici pour leur coiffure.</p>
+                </div>
+                <div class='affiche'>
+                    <h3>TENDANCE</h3>
+                    <hr size="1px">
+                    <div class="block_img">
+                        <img src="{{ asset('bundles/DS/img/affiche_2.jpg') }}">
+                    </div>
+                    <p>La tendance fait de nous ce que nous sommes aujourd'hui. Elle est indispensable
+                    pour notre succès.</p>
+                </div>
+                <div class='affiche_last'>
+                    <h3>FASHION</h3>
+                    <hr size="1px">
+                    <div class="block_img">
+                        <img src="{{ asset('bundles/DS/img/affiche_3.jpg') }}">
+                    </div>
+                    <p>La mode nous permet de nous reconnaître au sein d'un groupe.
+                    Pour que tous puisse appartenir à un groupe qui nous correspond, choississons notre coupe.</p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        
+        <div class="white block">
+            <div class='center'>
+                <span id="title_comment">LE MEILLEUR SALON DE COIFFURE !</span>
+                <div id="title_comment2">Nos clients avant tout</div>
+                <hr>
+                <div class="comment">Parce que nous pensons que le client est plus important que tout,
+                    nous avons choisis d'être plus à l'écoute de nos ce dernier.<br />
+                    Nous voulons assurer à tout nos clients une horraire disponible qui leur convient dans la journée !<br /><br />
+                    N'hésitez plus et venez au plus vite dans l'un de nos nombreux salons partout en France !<br /><br />
+                    DS Innovation,<br />pour vous coiffer.
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+                    
+        <div class='black block'>
+            <div class='center'>
+                <h2>ESSENTIAL LOOKS</h2>
+                <hr size="1px">
+                <div class="essential_look">
+                    (Mettre série image via symfony)<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
