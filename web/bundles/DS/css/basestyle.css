@@ -52,10 +52,22 @@ footer p {
     margin-top: 20px;
 }
 
+.header-content {
+    display: flex;
+    width: 300px;
+    float: left;
+}
+
 header h1 {
-    margin-left: 40px;
+    margin-top: 25px;
     width: 200px;
     float: left;
+    font-size: 26px;
+}
+
+header img {
+    width: 100px;
+    height: 80px;
 }
 
 header {
@@ -87,6 +99,7 @@ header li .menu:hover {
 }
 
 header ul {
+    margin-top : 23px;
     border-top: solid 1px black;
     border-bottom: solid 1px black;
     width: 652px;
