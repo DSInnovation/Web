@@ -1,4 +1,41 @@
+.connexion_block {
+    background-image: url('/bundles/DS/img/brune.jpg');
+    width: 100%;
+    height: 500px;
+    background-size: 100%;
+}
+
+.form {
+    padding: 75px;
+    width: 280px;
+}
+
+form {
+    padding: 20px 20px 10px 20px;
+    width: 280px;
+    background-color: rgba(100, 100, 100, 0.25);
+    border-radius: 10px;
+}
+
 input {
-    width: 100px;
-    height: 30px;
+    float: right;
+    width: 150px;
+    height: 20px;
+    font-size: 15px;
+}
+
+form div {
+    padding-bottom: 10px;
+}
+
+form button {
+    margin-top: 20px;
+    margin-left: 65px;
+    margin-bottom: -20px;
+    width: 150px;
+    height: 40px;
+    font-size: 17px;
+    background-color: rgba(200, 50, 50, 1);
+    color: white;
+    border: none;
 }
