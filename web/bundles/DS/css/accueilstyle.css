@@ -26,6 +26,16 @@
     width: 710px;
 }
 
+.en_savoir_plus {
+    margin: auto;
+    background-color: #F0F0F0;
+    width: 75px;
+    padding: 15px 25px;
+    color: black;
+    margin-top: 40px;
+    border-radius: 5px;
+}
+
 .essential_look {
     margin-top: 30px;
 }
