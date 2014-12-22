@@ -28,6 +28,19 @@
 
 .essential_look {
     margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.img_footer {
+    width: 237px;
+    height: 300px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.img_footer img {
+    float: right;
+    height: 112%;
 }
 
 #header_img {
