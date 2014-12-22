@@ -27,6 +27,8 @@ class DefaultController extends Controller
                 ))
                 ->getForm();
         
+        
+        $form->bind($request);
         return array('form' => $form->createView());
     }
 }
