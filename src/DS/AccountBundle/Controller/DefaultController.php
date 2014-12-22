@@ -6,14 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/connexion")
-     * @Template()
+     * Create a form
+     * @return form
      */
-    public function connexionAction(Request $request)
+    private function createFormConnexion()
     {
         $form = $this->createFormBuilder()
                 ->add('login', 'text', array(
@@ -27,8 +28,39 @@ class DefaultController extends Controller
                 ))
                 ->getForm();
         
+        return $form;
+    }
+    
+    /**
+     * @Route("/connexion")
+     * @Template()
+     */
+    public function connexionAction(Request $request)
+    {
+        $form = $this->createFormConnexion();
+
+        if(!$request->isMethod('post')) {
+            return array('form' => $form->createView());
+        }
         
         $form->bind($request);
+
+        if($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('DSAccountBundle:webAccount');
+
+            $user = $repository->findBy(
+                        array(
+                            'login' => $form->get('login')->getData(),
+                            'password' => $form->get('password')->getData()
+                        ));
+
+            if(1 == count($user)) {
+                $session = $request->getSession();
+                $session->set('id', $user[0]->getId());
+                //return $this->redirect($this->generateUrl('index'));
+            }
+        }
         return array('form' => $form->createView());
     }
 }

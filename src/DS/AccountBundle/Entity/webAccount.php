@@ -5,12 +5,12 @@ namespace DS\AccountBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * web_account
+ * webAccount
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class web_account
+class webAccount
 {
     /**
      * @var integer
