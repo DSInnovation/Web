@@ -9,11 +9,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/Account")
+     * @Route("/connexion")
      * @Template()
      */
-    public function indexAction()
+    public function connexionAction()
     {
-        return array();
+        $form = $this->createFormBuilder()
+                ->add('login', 'text', array(
+                    'label' => 'Nom de compte : '
+                ))
+                ->add('password', 'password', array (
+                    'label' => 'Mot de passe : '
+                ))
+                ->add('submit', 'submit', array (
+                    'label' => 'Se connecter'
+                ))
+                ->getForm();
+        
+        return array('form' => $form->createView());
     }
 }
