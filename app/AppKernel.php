@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new DS\AccountBundle\DSAccountBundle(),
             new DS\BaseBundle\DSBaseBundle(),
+            new DS\CommandesBundle\CommandesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
