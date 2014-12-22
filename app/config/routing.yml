@@ -1,3 +1,8 @@
+commandes:
+    resource: "@CommandesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ds_base:
     resource: "@DSBaseBundle/Controller/"
     type:     annotation
