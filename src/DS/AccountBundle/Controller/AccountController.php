@@ -45,7 +45,7 @@ class AccountController extends Controller
        
         
         $infos = $this->jointureAction();
-   //     var_dump($infos);
+        
         return array('infoaccount' => $infos);
     }
 }
