@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}<link rel='stylesheet' href="{{ asset('bundles/DS/css/inscriptionstyle.css') }}" />{% endblock %}
+
+{% block body %} 
+    <section>
+        <div class="black block">
+            <div class="center inscription_block">
+                <div class="form">
+                    {{ form(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
