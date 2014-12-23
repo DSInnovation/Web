@@ -1,8 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{% block stylesheets %}<link rel='stylesheet' href="{{ asset('bundles/DS/css/commandes.css') }}" />{% endblock %}
+
 {% block body %}
-    <section style="background:red;">
-        COMMANDES
+    <section>
+        <h2>COMMANDES</h2>
         {{ form(form2) }}
     </section>
 {% endblock %}
