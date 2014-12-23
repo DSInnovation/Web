@@ -2,7 +2,6 @@
 
 namespace DS\BaseBundle\Controller;
 
-use DS\BaseBundle\Entity\webHomePicture;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -10,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route(path='/', name='index')
      * @Template()
      */
     public function indexAction()
