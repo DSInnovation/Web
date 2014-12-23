@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class AccountController extends Controller
 {
     /**
-     * 
-     * 
+     * Create query for Informations User Profil
+     * @return query
      */
     public function jointureAction()
     {
@@ -20,7 +20,7 @@ class AccountController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->createQuery('
-            SELECT A.login, A.password, C.prenom, C.sexe, C.email, C.dateNaissance, F.nom, F.adresse, F.points
+            SELECT A.login, A.password, C.prenom, C.sexe, C.email, C.dateNaissance, C.tel, F.nom, F.adresse, F.points
             FROM DSAccountBundle:webAccount A, DSAccountBundle:appClient C, DSAccountBundle:appFamille F
             WHERE A.id = :id
             AND A.idClient = C.id
@@ -31,7 +31,7 @@ class AccountController extends Controller
     }
 
         /**
-     * @Route(path="/compte", name="moncompte")
+     * @Route(path="/compte", name="compte")
      * @Template()
      */
     public function monCompteAction()

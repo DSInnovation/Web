@@ -57,9 +57,9 @@ class appClient
     private $dateNaissance;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="tel", type="integer")
+     * @ORM\Column(name="tel", type="string", length=12)
      */
     private $tel;
 
@@ -192,7 +192,7 @@ class appClient
     /**
      * Set tel
      *
-     * @param integer $tel
+     * @param string $tel
      * @return appClient
      */
     public function setTel($tel)
@@ -205,7 +205,7 @@ class appClient
     /**
      * Get tel
      *
-     * @return integer 
+     * @return string 
      */
     public function getTel()
     {

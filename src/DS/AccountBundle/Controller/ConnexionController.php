@@ -57,7 +57,7 @@ class ConnexionController extends Controller
             if(1 == count($user)) {
                 $session = $request->getSession();
                 $session->set('id', $user[0]->getId());
-                return $this->redirect($this->generateUrl('index'));
+                return $this->redirect($this->generateUrl('compte'));
             }
         }
         return array('form' => $form->createView());
