@@ -20,6 +20,6 @@ class DefaultController extends Controller
         
         $pictures = $image->findAll();
         
-        return array();
+        return array('pictures' => $pictures);
     }
 }
