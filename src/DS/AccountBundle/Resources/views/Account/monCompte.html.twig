@@ -1,9 +1,25 @@
 {% extends '::base.html.twig' %}
 
-{% block stylesheets %}<link rel='stylesheet' href="{{ asset('bundles/DS/css/connexionstyle.css') }}" />{% endblock %}
+{% block stylesheets %}<link rel='stylesheet' href="{{ asset('bundles/DS/css/monComptestyle.css') }}" />{% endblock %}
 
 {% block body %} 
     <section>
-        
+        <div class="black block">
+            <div class="center">
+                <h2>Mon Profil</h2>
+                <br />
+                <hr size="1px">
+                <br />
+                <div class="info">
+                    <p>Mon Nom de Famille : </p>
+                    <p>Mon Prénom : </p>
+                    <p>Mon Numéro de téléphone : </p>
+                    <p>Mon Adresse Mail : </p>
+                    <p>Mon Login : {{ infoaccount.login }} </p> 
+                    <p>Mon Mot de Passe : </p>
+                    <p>Mon Nombre de points restants : </p> 
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock %}

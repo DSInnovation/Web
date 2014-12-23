@@ -21,7 +21,12 @@ class AccountController extends Controller
         if(!$session->get('id')) {
             return $this->redirect ($this->generateUrl ("connexion"));
         }
+        
+        $var = $this->getDoctrine()->getManager();
+        $info = $var->getRepository('DSAccountBundle:webAccount');
+        
+        $infos = $info->findOneBy(array('id' => $session->get('id')));
 
-        return array();
+        return array('infoaccount' => $infos);
     }
 }
