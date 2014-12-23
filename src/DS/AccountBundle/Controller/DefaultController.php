@@ -111,48 +111,4 @@ class DefaultController extends Controller
         
         return $this->redirect($this->generateUrl('index'));
     }
-    
-    
-    /**
-     * Create inscription form
-     * @return form
-     */
-    private function createFormInscription()
-    {
-        $form = $this->createFormBuilder()
-                ->add('login', 'text', array(
-                    'label' => 'Nom de compte : '
-                ))
-                ->add('password', 'password', array (
-                    'label' => 'Mot de passe : '
-                ))
-                ->add('passwordverif', 'password', array (
-                    'label' => 'Mot de passe (vérification) : '
-                ))
-                ->add('email', 'email' , array (
-                    'label' => 'Adresse mail(enregistré dans nos salons) : '
-                ))
-                ->add('submit', 'submit', array (
-                    'label' => 'S\'inscrire'
-                ))
-                ->getForm();
-        
-        return $form;
-    }
-    
-    /**
-     * @Route(path="/inscription", name="inscription")
-     * @Template()
-     */
-    public function inscriptionAction(Request $request)
-    {
-        $session = $request->getSession();
-        
-        $form = $this->createFormInscription();
-        
-        if($session->get('id')) {
-            return $this->redirect($this->generateUrl("index"));
-        }
-        return array('form' => $form->createView());
-    }
 }
