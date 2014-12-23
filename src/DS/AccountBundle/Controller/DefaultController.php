@@ -32,7 +32,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/connexion")
+     * @Route(path = "/connexion", name="connexion")
      * @Template()
      */
     public function connexionAction(Request $request)
@@ -58,9 +58,57 @@ class DefaultController extends Controller
             if(1 == count($user)) {
                 $session = $request->getSession();
                 $session->set('id', $user[0]->getId());
-                //return $this->redirect($this->generateUrl('index'));
+                return $this->redirect($this->generateUrl('index'));
             }
         }
         return array('form' => $form->createView());
+    }
+    
+    /**
+     * @Route(path = "/menu", name="menu")
+     * @Template()
+     */
+    public function menuAction()
+    {
+        $session = new Session();
+        $session->start();
+        
+        if(null != $session->get('id')){
+            $menu[0]['nom'] = 'ACCUEIL';
+            $menu[0]['lien'] = '/';
+            $menu[1]['nom'] = 'PRODUIT';
+            $menu[1]['lien'] = '/';
+            $menu[2]['nom'] = 'CONTACT';
+            $menu[2]['lien'] = '/';
+            $menu[3]['nom'] = 'DECONNEXION';
+            $menu[3]['lien'] = '/deconnexion';
+        } else {
+            $menu[0]['nom'] = 'ACCUEIL';
+            $menu[0]['lien'] = '/';
+            $menu[1]['nom'] = 'PRODUIT';
+            $menu[1]['lien'] = '/';
+            $menu[2]['nom'] = 'CONTACT';
+            $menu[2]['lien'] = '/';
+            $menu[3]['nom'] = 'CONNEXION';
+            $menu[3]['lien'] = '/connexion';
+        }
+        
+        return array('menus' => $menu);
+    }
+    
+    /**
+     * @Route(path="deconnexion", name="deconnexion")
+     * @Template()
+     */
+    public function deconnexionAction()
+    {
+        $session = new Session();
+        $session->Start();
+        
+        if($session->get('id')) {
+            $session->remove('id');
+        }
+        
+        return $this->redirect($this->generateUrl('index'));
     }
 }
