@@ -83,6 +83,16 @@
         <script src="{{ asset("bundles/DS/JS/jquery-2.1.3.min.js") }} "></script>
         <script>
             var index = 0;
+            function updateImage() {
+                index += 1;
+                $('#bigscreen').css('marginTop', -305*index + "px");
+
+                if ((index + 1)*4 >= $('#bigscreen img').length)
+                {
+                    index = -1;
+                }
+            }
+            setInterval(updateImage, 7000);
         </script>
     </section>
 {% endblock %}
