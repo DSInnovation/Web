@@ -127,10 +127,10 @@ class DefaultController extends Controller
                     'label' => 'Mot de passe : '
                 ))
                 ->add('passwordverif', 'password', array (
-                    'label' => 'Mot de passe (vérification) : '
+                    'label' => 'Répéter Mot de passe : '
                 ))
                 ->add('email', 'email' , array (
-                    'label' => 'Adresse mail(enregistré dans nos salons) : '
+                    'label' => 'Adresse mail : '
                 ))
                 ->add('submit', 'submit', array (
                     'label' => 'S\'inscrire'
