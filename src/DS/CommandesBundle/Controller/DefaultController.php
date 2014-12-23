@@ -5,8 +5,7 @@ namespace DS\CommandesBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use DS\CommandesBundle\Entity\Entity;
-use DS\CommandesBundle\Form\EntityType;
+use DS\CommandesBundle\Entity\WebLogin;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
@@ -17,21 +16,16 @@ class DefaultController extends Controller
      */
     public function commandesAction(Request $req)
     {
-        $form = $this->createForm(new EntityType());
+         // crée une tâche et lui donne quelques données par défaut pour cet exemple
+        $task = new WebLogin();
         
-        if($form->handleRequest($req)->isValid())
-        {
-            $cde = $form->getData();
-            $this->getDoctrine()->getManager()->persist($cde);
-            $this->getDoctrine()->getManager()->flush();
-            $this->getForm();
-        }
-        
-        else
-        {
-            return array("<body><h1>PROBLEM</h1></body>");
-        }
-       
-        return array('form' => $form->createView());
+        $form = $this->createFormBuilder($task)
+            ->add('username', 'text')
+            ->add('save', 'submit')
+            ->getForm();
+
+        return $this->render('CommandesBundle:Default:commandes.html.twig', array(
+            'form2' => $form->createView(),
+        ));
     }
 }
