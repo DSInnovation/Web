@@ -76,19 +76,19 @@ class DefaultController extends Controller
         if(null != $session->get('id')){
             $menu[0]['nom'] = 'ACCUEIL';
             $menu[0]['lien'] = '/';
-            $menu[1]['nom'] = 'PRODUIT';
+            $menu[1]['nom'] = 'PRODUITS';
             $menu[1]['lien'] = '/';
-            $menu[2]['nom'] = 'CONTACT';
-            $menu[2]['lien'] = '/';
+            $menu[2]['nom'] = 'MON COMPTE';
+            $menu[2]['lien'] = '/compte';
             $menu[3]['nom'] = 'DECONNEXION';
             $menu[3]['lien'] = '/deconnexion';
         } else {
             $menu[0]['nom'] = 'ACCUEIL';
             $menu[0]['lien'] = '/';
-            $menu[1]['nom'] = 'PRODUIT';
+            $menu[1]['nom'] = 'PRODUITS';
             $menu[1]['lien'] = '/';
-            $menu[2]['nom'] = 'CONTACT';
-            $menu[2]['lien'] = '/';
+            $menu[2]['nom'] = 'S\'INSCRIRE';
+            $menu[2]['lien'] = '/inscription';
             $menu[3]['nom'] = 'CONNEXION';
             $menu[3]['lien'] = '/connexion';
         }
@@ -97,7 +97,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route(path="deconnexion", name="deconnexion")
+     * @Route(path="/deconnexion", name="deconnexion")
      * @Template()
      */
     public function deconnexionAction()
@@ -110,5 +110,20 @@ class DefaultController extends Controller
         }
         
         return $this->redirect($this->generateUrl('index'));
+    }
+    
+    /**
+     * @Route(path="/inscription", name="inscription")
+     * @Template()
+     */
+    public function inscriptionAction()
+    {
+        $session = new Session();
+        $session->Start();
+        
+        if($session->get('id')) {
+            return $this->redirect($this->generateUrl("index"));
+        }
+        return array();
     }
 }
