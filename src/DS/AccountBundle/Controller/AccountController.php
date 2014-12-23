@@ -20,15 +20,14 @@ class AccountController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->createQuery('
-            SELECT A.login, A.password, C.prenom, C.sexe, C.email, C.DateNaissance, F.nom, F.adresse, F.points
-            FROM DSAccountBundle:webAccount A 
-            INNER JOIN DSAccountBundle:appClient C ON A.idClient = C.id
-            INNER JOIN DSAccountBundle:appFamille F ON C.IdFamille = F.id;
-        ');
+            SELECT A.login, A.password, C.prenom, C.sexe, C.email, C.dateNaissance, F.nom, F.adresse, F.points
+            FROM DSAccountBundle:webAccount A, DSAccountBundle:appClient C, DSAccountBundle:appFamille F
+            WHERE A.id = :id
+            AND A.idClient = C.id
+            AND C.idFamille = F.id
+        ')->setParameter('id', $session->get('id'));
 
-   $query->setParameter('id', $session->get('id'));
-
-        return $query->getResult();
+        return $query->getSingleResult();
     }
 
         /**
@@ -42,9 +41,7 @@ class AccountController extends Controller
         
         if(!$session->get('id')) {
             return $this->redirect ($this->generateUrl ("connexion"));
-        } else {
-            return $this->redirect ($this->generateUrl ("moncompte"));
-        }
+        } 
        
         
         $infos = $this->jointureAction();

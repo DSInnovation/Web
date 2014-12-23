@@ -11,14 +11,14 @@
                 <hr size="1px">
                 <br />
                 <div class="info">
-                    <p>Nom de Famille : </p>
-                    <p>Prénom : </p>
-                    <p>Sexe : </p>
+                    <p>Nom de Famille : {{ infoaccount.nom }}</p>
+                    <p>Prénom : {{ infoaccount.prenom }}</p>
+                    <p>Sexe : {{ infoaccount.sexe }}</p>
                     <p>Numéro de téléphone : </p>
-                    <p>Adresse Mail : </p>
+                    <p>Adresse Mail : {{ infoaccount.email }}</p>
                     <p>Login : {{ infoaccount.login }} </p> 
-                    <p>Mot de Passe : </p>
-                    <p>Nombre de points restants : </p> 
+                    <p>Mot de Passe : {{ infoaccount.password }}</p>
+                    <p>Nombre de points restants : {{ infoaccount.points }}</p> 
                 </div>
             </div>
         </div>
