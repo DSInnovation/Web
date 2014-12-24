@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormError;
 use DS\AccountBundle\Entity\webAccount;
+use DS\AccountBundle\Entity\webActivate;
 
 class InscriptionController extends Controller
 {
@@ -43,16 +44,51 @@ class InscriptionController extends Controller
      * @param type $login
      * @return bool
      */
-    private function checkLoginFree($login)
+    private function checkLoginFree(&$form, $em)
     {
-        $em = $this->getDoctrine()->getManager();
+        $accountRepo = $em->getRepository('DSAccountBundle:webAccount');
+        
+        $existUserLogin = $accountRepo->findOneBy(array('login' => $form->get('login')->getData()));
+        if($existUserLogin) {
+            $form->addError(new FormError('Le login est déjà prit !'));
+        }
+    }
+    
+    private function checkPassword(&$form)
+    {   
+        if($form->get('password')->getData() != $form->get('passwordverif')->getData()) {
+            $form->addError(new FormError('Les mots de passes différent !'));
+        }
+    }
+    
+    private function checkEmail(&$form, $em)
+    {
+        $clientRepo = $em->getRepository('DSAccountBundle:appClient');
+        
+        $existClient = $clientRepo->findOneBy(array('email' => $form->get('email')->getData()));
+        if(!$existClient) {
+            $form->addError(new FormError('L\'adresse mail n\'existe pas'));
+        }
+        
+        return $existClient->getId();
+    }
+    
+    private function checkAccountWaitingValidate(&$form, $em, $idClient)
+    {
+        $repository = $em->getRepository('DSAccountBundle:webActivate');
+        $existUserMail = $repository->findOneBy(array('id' => $idClient));
+        if($existUserMail) {
+            $form->addError(new FormError('Un compte est déjà en attente de validation !'));
+        }
+    }
+    
+    private function checkUserUseIdClient(&$form, $em, $idClient)
+    {
         $repository = $em->getRepository('DSAccountBundle:webAccount');
-        
-        $check = $repository->findBy(array (
-            'login' => $login
-        ));
-        
-        return $check == null;
+        $existIdClient = $repository->findOneBy(array('idClient' => $idClient));
+        if($existIdClient) {
+            $form->addError(new FormError('Un compte est déjà lié au client !'));
+        }
     }
     
     /**
@@ -65,38 +101,26 @@ class InscriptionController extends Controller
     public function inscrireUser($form)
     {
         $em = $this->getDoctrine()->getManager();
-        $accountRepo = $em->getRepository('DSAccountBundle:webAccount');
-        $clientRepo = $em->getRepository('DSAccountBundle:appClient');
-        $activeRepo = $em->getRepository('DSAccountBundle:webActivate');
+        $idClient = $this->checkEmail($form, $em);
+        $this->checkUserUseIdClient($form, $em, $idClient);
+        $this->checkAccountWaitingValidate($form, $em, $idClient);
+        $this->checkLoginFree($form, $em);
+        $this->checkPassword($form);
         
-        $data = $form->getData();
-        
-        if($data['password'] != $data['passwordverif']) {
-            $form->addError(new FormError('Les mots de passes différent !'));
-        }
-        
-        $existUserLogin = $accountRepo->findBy(array('login' => $data['login']));
-        if($existUserLogin) {
-            $form->addError(new FormError('Le login est déjà prit !'));
-        }
-        
-        /*$existUserMail = $accountRepo->findBy(array('email' => $data['email']));
-        if($existUserMail) {
-            $form->addError(new FormError('L\'adresse mail est déjà prit !'));
-        }*/
-        
-        $existClient = $clientRepo->findOneBy(array('email' => $data['email']));
-        if(!$existClient) {
-            $form->addError(new FormError('L\'adresse mail n\'existe pas'));
-        }
-        
-        if(!$form->getErrorsAsString()) {
+        if(!$form->getErrorsAsString()) {     
             $user = new webAccount();
             $user->setActivate(0);
-            $user->setIdClient($existClient->getId());
-            $user->setLogin($data['login']);
-            $user->setPassword($data['password']);
+            $user->setIdClient($idClient);
+            $user->setLogin($form->get('login')->getData());
+            $user->setPassword($form->get('password')->getData());
             $em->persist($user);
+            $em->flush();
+            
+            $validate = new webActivate();
+            $validate->setIdWebAccount($user->getId());
+            $validate->setUrl('test');
+            $em->persist($validate);
+            
             $em->flush();
         }
         return array('form' => $form);

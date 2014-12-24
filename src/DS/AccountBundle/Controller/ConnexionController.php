@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormError;
 
 class ConnexionController extends Controller
 {
@@ -44,22 +45,29 @@ class ConnexionController extends Controller
         
         $form->bind($request);
 
-        if($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $repository = $em->getRepository('DSAccountBundle:webAccount');
+        if(!$form->isValid()) {
+            return array('form' => $form->createView());
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('DSAccountBundle:webAccount');
 
-            $user = $repository->findBy(
-                        array(
-                            'login' => $form->get('login')->getData(),
-                            'password' => $form->get('password')->getData()
-                        ));
+        $user = $repository->findOneBy(
+                    array(
+                        'login' => $form->get('login')->getData(),
+                        'password' => $form->get('password')->getData()
+                    ));
 
-            if(1 == count($user)) {
+        if($user) {
+            if(1 == $user->getActivate()) {
                 $session = $request->getSession();
-                $session->set('id', $user[0]->getId());
+                $session->set('id', $user->getId());
                 return $this->redirect($this->generateUrl('compte'));
+            } else {
+                $form->addError(new FormError('Le compte n\'est pas validé !'));
             }
         }
+        
         return array('form' => $form->createView());
     }
 }
