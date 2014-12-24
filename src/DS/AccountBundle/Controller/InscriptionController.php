@@ -54,6 +54,12 @@ class InscriptionController extends Controller
         }
     }
     
+    /**
+     * Check if password = passwordverif
+     * If it's not then add a FormError
+     * 
+     * @param form $form
+     */
     private function checkPassword(&$form)
     {   
         if($form->get('password')->getData() != $form->get('passwordverif')->getData()) {
@@ -61,6 +67,14 @@ class InscriptionController extends Controller
         }
     }
     
+    /**
+     * check if the mail exist in the table appClient
+     * if he exist then return the id of the line in the table
+     * 
+     * @param form $form
+     * @param manager $em
+     * @return int
+     */
     private function checkEmail(&$form, $em)
     {
         $clientRepo = $em->getRepository('DSAccountBundle:appClient');
@@ -73,6 +87,14 @@ class InscriptionController extends Controller
         return $existClient->getId();
     }
     
+    /**
+     * Check if an account is waiting for a validation
+     * If account is waiting for the id then add a FormError
+     * 
+     * @param form $form
+     * @param manager $em
+     * @param int $idClient
+     */
     private function checkAccountWaitingValidate(&$form, $em, $idClient)
     {
         $repository = $em->getRepository('DSAccountBundle:webActivate');
@@ -82,6 +104,14 @@ class InscriptionController extends Controller
         }
     }
     
+    /**
+     * Check if mail is not use by a webAccount
+     * If someone does then add a FormError
+     * 
+     * @param form $form
+     * @param manager $em
+     * @param int $idClient
+     */
     private function checkUserUseIdClient(&$form, $em, $idClient)
     {
         $repository = $em->getRepository('DSAccountBundle:webAccount');
