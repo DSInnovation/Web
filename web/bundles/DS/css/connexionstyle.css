@@ -35,7 +35,8 @@ form button {
     width: 150px;
     height: 40px;
     font-size: 17px;
-    background-color: rgba(200, 50, 50, 1);
+    /*background-color: rgba(200, 50, 50, 1);*/
+    background-color: #c99900;
     color: white;
     border: none;
 }
