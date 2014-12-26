@@ -11,6 +11,16 @@
     width: 280px;
 }
 
+.form p {
+    text-align: justify;
+    color: white;
+    margin-left: 15px;
+    margin-right: -65px;
+    margin-top: 15px;
+    border: 2px solid red;
+    padding: 10px;
+}
+
 form {
     padding: 20px 20px 10px 20px;
     width: 320px;
@@ -46,14 +56,4 @@ input {
     width: 160px;
     height: 20px;
     font-size: 12px;
-}
-
-div p {
-    text-align: justify;
-    color: white;
-    margin-left: 15px;
-    margin-right: -65px;
-    margin-top: 15px;
-    border: 2px solid red;
-    padding: 10px;
 }
