@@ -14,13 +14,50 @@
                     <p>Nom de Famille : {{ infoaccount.nom }}</p>
                     <p>Prénom : {{ infoaccount.prenom }}</p>
                     <p>Sexe : {{ infoaccount.sexe }}</p>
-                    <p>Numéro de téléphone : {{ infoaccount.tel }}</p>
+                    <p>Numéro de téléphone : {{ infoaccount.tel }} <a href="#" id="phone" class='edit'>Modifier</a> <input id="tel"><button id="valid_tel"></button><button id="cancel_tel"></button></p>
                     <p>Adresse Mail : {{ infoaccount.email }}</p>
                     <p>Login : {{ infoaccount.login }} </p> 
-                    <p>Mot de Passe : {{ infoaccount.password }}</p>
-                    <p>Nombre de points restants : {{ infoaccount.points }}</p> 
+                    <p>Mot de Passe : {{ infoaccount.password }} <a href="#" id="pass" class='edit'>Modifier</a> <input id="passwd"><button id="valid_pass"></button><button id="cancel_pass"></button></p>
+                    <div class='point'>
+                        <p>Nombre de points restants : {{ infoaccount.points }}</p>
+                    </div>
+                    <a href="#"><div class="resa">Réservation</div></a>
                 </div>
             </div>
         </div>
+        <script src="{{ asset("bundles/DS/JS/jquery-2.1.3.min.js") }} "></script>
+        <script>
+            $("#tel").hide();
+            $("#valid_tel").hide();
+            $("#cancel_tel").hide();
+            $("#phone").on('click', function(){
+                $("#tel").show();
+                $("#valid_tel").show();
+                $("#cancel_tel").show().click(function() {
+                    $("#tel").hide();
+                    $("#valid_tel").hide();
+                    $("#cancel_tel").hide();
+                });
+            });
+            
+            $("#passwd").hide();
+            $("#valid_pass").hide();
+            $("#cancel_pass").hide();
+            $("#pass").on('click', function(){
+                $("#passwd").show();
+                $("#valid_pass").show();
+                $("#cancel_pass").show().click(function() {
+                    $("#passwd").hide();
+                    $("#valid_pass").hide();
+                    $("#cancel_pass").hide();
+                });
+            });
+            
+            $("#valid_cancel").click(function() {
+                $("#tel").hide();
+                $("#valid_tel").hide();
+                $("#cancel_tel").hide();
+            });
+        </script>
     </section>
 {% endblock %}

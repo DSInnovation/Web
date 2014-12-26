@@ -1,0 +1,43 @@
+.edit {
+    background-color: #F0F0F0;
+    color: black;
+    margin-left: 10px;
+    border-radius: 5px;
+    padding: 2px 15px 2px 15px;
+}
+
+.point p {
+    color: red;
+    font-size: 20px;
+    text-align: right;
+    border: 1px solid white;
+    margin-left: 710px;
+    padding-right: 6px;
+    padding-top: 5px;
+}
+
+.resa {
+    margin: auto;
+    background-color: #F0F0F0;
+    width: 75px;
+    padding: 15px 25px;
+    color: black;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+button {
+    width: 20px;
+    padding-bottom: 6px;
+    height: 19px;
+    margin-left: 10px;
+}
+
+input {
+    padding: 1px 15px 0 15px;
+    margin-left: 15px;
+}
+
+p {
+    padding-bottom: 8px;
+}
