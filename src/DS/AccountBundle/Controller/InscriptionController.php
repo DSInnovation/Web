@@ -84,7 +84,7 @@ class InscriptionController extends Controller
             $form->addError(new FormError('L\'adresse mail n\'existe pas'));
         }
         
-        return $existClient->getId();
+        return $existClient['id'];
     }
     
     /**
