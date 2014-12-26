@@ -21,22 +21,22 @@ class DefaultController extends Controller
         
         if(null != $session->get('id')){
             $menu[0]['nom'] = 'ACCUEIL';
-            $menu[0]['lien'] = '/';
+            $menu[0]['lien'] = './';
             $menu[1]['nom'] = 'PRODUITS';
-            $menu[1]['lien'] = '/';
+            $menu[1]['lien'] = './';
             $menu[2]['nom'] = 'MON COMPTE';
-            $menu[2]['lien'] = '/compte';
+            $menu[2]['lien'] = './compte';
             $menu[3]['nom'] = 'DECONNEXION';
-            $menu[3]['lien'] = '/deconnexion';
+            $menu[3]['lien'] = './deconnexion';
         } else {
             $menu[0]['nom'] = 'ACCUEIL';
-            $menu[0]['lien'] = '/';
+            $menu[0]['lien'] = './';
             $menu[1]['nom'] = 'PRODUITS';
-            $menu[1]['lien'] = '/';
+            $menu[1]['lien'] = './';
             $menu[2]['nom'] = 'S\'INSCRIRE';
-            $menu[2]['lien'] = '/inscription';
+            $menu[2]['lien'] = './inscription';
             $menu[3]['nom'] = 'CONNEXION';
-            $menu[3]['lien'] = '/connexion';
+            $menu[3]['lien'] = './connexion';
         }
         
         return array('menus' => $menu);
