@@ -162,14 +162,14 @@ class InscriptionController extends Controller
             $user->setIdClient($idClient);
             $user->setLogin($form->get('login')->getData());
             $user->setPassword($form->get('password')->getData());
-            //$em->persist($user);
-            //$em->flush();
+            $em->persist($user);
+            $em->flush();
             
             $validate = new webActivate();
             $validate->setIdWebAccount($user->getId());
             $validate->setUrl($this->randomUrl());
-            //$em->persist($validate);
-            //$em->flush();
+            $em->persist($validate);
+            $em->flush();
             
             $this->sendConfirmationMail($form->get('login')->getData(),
                     $validate->getUrl(), 
