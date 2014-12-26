@@ -148,7 +148,7 @@ class InscriptionController extends Controller
      * @param form $form
      * @return form
      */
-    public function inscrireUser($form)
+    private function inscrireUser($form)
     {
         $em = $this->getDoctrine()->getManager();
         $idClient = $this->checkEmail($form, $em);

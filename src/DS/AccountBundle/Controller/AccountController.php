@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 class AccountController extends Controller
 {
@@ -30,7 +31,7 @@ class AccountController extends Controller
         return $query->getSingleResult();
     }
 
-        /**
+     /**
      * @Route(path="/compte", name="compte")
      * @Template()
      */
@@ -46,5 +47,38 @@ class AccountController extends Controller
         $infos = $this->LoadUserInformation();
         
         return array('infoaccount' => $infos);
+    }
+    
+    
+    /**
+     * Create a form for edit the user's password
+     * 
+     * @return form form
+     */
+    private function createEditPasswordForm() {
+        $form = $this->createFormBuilder()
+                ->add('password', 'password', array (
+                    'label' => 'Mot de passe : '
+                ))
+                ->add('passwordverif', 'password', array (
+                    'label' => 'Répéter Mot de passe : '
+                ))
+                ->add('Modifier', 'submit')
+                ->getForm();
+        
+        return $form;
+    }
+    
+    /**
+     * @Route("/compte/edit/password")
+     * @Template()
+     * 
+     * @param Request $request
+     */
+    public function editPasswordAction(Request $request)
+    {
+        $form = $this->createEditPasswordForm();
+        return array('form' => $form->createView());
+        //return $this->redirect($this->generateUrl("compte"));
     }
 }
