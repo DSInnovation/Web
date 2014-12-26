@@ -17,17 +17,6 @@ form {
     border-radius: 10px;
 }
 
-input {
-    float: right;
-    width: 150px;
-    height: 20px;
-    font-size: 15px;
-}
-
-form div {
-    padding-bottom: 10px;
-}
-
 form button {
     margin-top: 20px;
     margin-left: 65px;
@@ -39,4 +28,21 @@ form button {
     background-color: #c99900;
     color: white;
     border: none;
+}
+
+form div {
+    padding-bottom: 10px;
+}
+
+form ul li {
+    color: red;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+input {
+    float: right;
+    width: 150px;
+    height: 20px;
+    font-size: 15px;
 }
