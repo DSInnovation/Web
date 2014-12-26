@@ -16,6 +16,7 @@ a {
     margin-top: 10px;
     margin-right: 40px;
     text-align: center;
+    width: 290px;
 }
 
 .affiche, .affiche_last {
@@ -27,6 +28,9 @@ a {
 
 .affiche_last_f {
     text-align: right;
+    float: left;
+    margin-top: 10px;
+    width: 290px;
 }
 
 .black {
