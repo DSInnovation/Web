@@ -38,13 +38,13 @@ class ConnexionController extends Controller
     public function connexionAction(Request $request)
     {
         $form = $this->createFormConnexion();
-
+        // Check if the request is a POST method
         if(!$request->isMethod('post')) {
             return array('form' => $form->createView());
         }
         
         $form->bind($request);
-
+        // Check if the form is valid
         if(!$form->isValid()) {
             return array('form' => $form->createView());
         }
@@ -64,10 +64,43 @@ class ConnexionController extends Controller
                 $session->set('id', $user->getId());
                 return $this->redirect($this->generateUrl('compte'));
             } else {
-                $form->addError(new FormError('Le compte n\'est pas validé !'));
+                $form->addError(new FormError('Le compte n\'est pas actif !'));
             }
         }
         
         return array('form' => $form->createView());
+    }
+    
+    /**
+     * Check in webAccount table, if activate raw
+     * is set to "0" then add a FormError
+     * 
+     * @param
+     */
+    public function checkUserActivatedAccount($user)
+    {
+        
+    }
+    
+    /**
+     * Check in webAccount table, if login is incorrect
+     * then add a FormError
+     * 
+     * @param
+     */
+    public function checkUserLogin()
+    {
+        
+    }
+    
+    /**
+     * Check in webAccount table, if password is incorrect
+     * then add a FormError
+     * 
+     * @param
+     */
+    public function checkUserPassword()
+    {
+        
     }
 }
