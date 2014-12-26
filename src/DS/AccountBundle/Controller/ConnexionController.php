@@ -57,6 +57,8 @@ class ConnexionController extends Controller
                         'login' => $form->get('login')->getData(),
                         'password' => $form->get('password')->getData()
                     ));
+        
+        $this->checkUserInfo($form, $em);
 
         if($user) {
             if(1 == $user->getActivate()) {
@@ -64,22 +66,11 @@ class ConnexionController extends Controller
                 $session->set('id', $user->getId());
                 return $this->redirect($this->generateUrl('compte'));
             } else {
-                $form->addError(new FormError('Le compte n\'est pas actif !'));
+                $form->addError(new FormError('Ce compte n\'existe pas !'));
             }
         }
         
         return array('form' => $form->createView());
-    }
-    
-    /**
-     * Check in webAccount table, if activate raw
-     * is set to "0" then add a FormError
-     * 
-     * @param
-     */
-    public function checkUserActivatedAccount($user)
-    {
-        
     }
     
     /**
@@ -88,19 +79,17 @@ class ConnexionController extends Controller
      * 
      * @param
      */
-    public function checkUserLogin()
+    public function checkUserInfo(&$form, $em)
     {
+        $account = $em->getRepository('DSAccountBundle:webAccount');
         
-    }
-    
-    /**
-     * Check in webAccount table, if password is incorrect
-     * then add a FormError
-     * 
-     * @param
-     */
-    public function checkUserPassword()
-    {
+        $checkLog = $account->findOneBy(array('login' => $form->get('login')->getData()));
+        $checkLogForm = $form->get('login')->getData();
+        $checkPass = $account->findOneBy(array('password' => $form->get('password')->getData()));
+        $checkPassForm = $form->get('password')->getData();
         
+        if ($checkLog != $checkLogForm && $checkPass != $checkPassForm) {
+            $form->addError(new FormError('Le login ou le mot de passe est incorrect'));
+        }      
     }
 }

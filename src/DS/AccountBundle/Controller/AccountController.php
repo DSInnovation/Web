@@ -13,7 +13,7 @@ class AccountController extends Controller
      * Create query for Informations User Profil
      * @return query
      */
-    public function jointureAction()
+    private function LoadUserInformation()
     {
         $session = new Session();
     
@@ -43,8 +43,7 @@ class AccountController extends Controller
             return $this->redirect ($this->generateUrl ("connexion"));
         } 
        
-        
-        $infos = $this->jointureAction();
+        $infos = $this->LoadUserInformation();
         
         return array('infoaccount' => $infos);
     }
