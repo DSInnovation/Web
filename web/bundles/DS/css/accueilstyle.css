@@ -5,6 +5,14 @@
     height: 300px;
 }
 
+.affiche p {
+    text-align: justify;
+}
+
+.affiche_last p {
+    text-align: justify;
+}
+
 .affiche img, .affiche_last img {
     height: 100%;
 }
@@ -14,6 +22,7 @@
     font-size: 19px;
     float: left;
     width: 710px;
+    text-align: justify;
 }
 
 .en_savoir_plus {
