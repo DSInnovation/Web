@@ -82,27 +82,12 @@ class InscriptionController extends Controller
         $existClient = $clientRepo->findOneBy(array('email' => $form->get('email')->getData()));
         if(!$existClient) {
             $form->addError(new FormError('L\'adresse mail n\'existe pas'));
+            return $this->redirect($this->generateUrl('inscription'));
         }
         
-        return $existClient['id'];
+        return $existClient->getId();
     }
     
-    /**
-     * Check if an account is waiting for a validation
-     * If account is waiting for the id then add a FormError
-     * 
-     * @param form $form
-     * @param manager $em
-     * @param int $idClient
-     */
-    private function checkAccountWaitingValidate(&$form, $em, $idClient)
-    {
-        $repository = $em->getRepository('DSAccountBundle:webActivate');
-        $existUserMail = $repository->findOneBy(array('id' => $idClient));
-        if($existUserMail) {
-            $form->addError(new FormError('Un compte est déjà en attente de validation !'));
-        }
-    }
     
     /**
      * Check if mail is not use by a webAccount
@@ -122,6 +107,41 @@ class InscriptionController extends Controller
     }
     
     /**
+     * Generate random URL with 255 characters
+     * 
+     * @return string
+     */
+    private function randomUrl()
+    {
+        $assoc = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        $nombre_de_caracteres_max = 255;
+        $caracteres_aleatoires = "";
+
+        for ($i = 1; $i <= $nombre_de_caracteres_max; $i++)
+        {
+           //On génère un caractère alphanumérique aléatoire
+           $caracteres_aleatoires .= $assoc[rand(0, 61)];
+        }
+        
+        return $caracteres_aleatoires;
+    }
+    
+    private function sendConfirmationMail($login, $url, $mail)
+    {
+        $message = \Swift_Message::newInstance()
+                ->setSubject('Mail de validation')
+                ->setFrom('dsinnov@gmail.com')
+                ->setTo($mail)
+                ->setContentType('text/html')
+                ->setBody('Bonjour '. $login . ',<br />'
+                        . 'Pour valider votre compte, merci de cliquez sur le lien suivant : <br />'
+                        . '<a href="http://127.0.0.1/account/validate/' . $url . '">Cliquez ici</a>');
+        
+        $this->get('mailer')->send($message);
+    }
+    
+    /**
      * Check all the informations are valid
      * If it's true then persist DataBase
      * 
@@ -133,7 +153,6 @@ class InscriptionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $idClient = $this->checkEmail($form, $em);
         $this->checkUserUseIdClient($form, $em, $idClient);
-        $this->checkAccountWaitingValidate($form, $em, $idClient);
         $this->checkLoginFree($form, $em);
         $this->checkPassword($form);
         
@@ -143,15 +162,19 @@ class InscriptionController extends Controller
             $user->setIdClient($idClient);
             $user->setLogin($form->get('login')->getData());
             $user->setPassword($form->get('password')->getData());
-            $em->persist($user);
-            $em->flush();
+            //$em->persist($user);
+            //$em->flush();
             
             $validate = new webActivate();
             $validate->setIdWebAccount($user->getId());
-            $validate->setUrl('test');
-            $em->persist($validate);
+            $validate->setUrl($this->randomUrl());
+            //$em->persist($validate);
+            //$em->flush();
             
-            $em->flush();
+            $this->sendConfirmationMail($form->get('login')->getData(),
+                    $validate->getUrl(), 
+                    $form->get('email')->getData()
+            );
         }
         return array('form' => $form);
     }
