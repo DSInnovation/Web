@@ -51,7 +51,7 @@ class AccountController extends Controller
     
     
     /**
-     * Create a form for edit the user's password
+     * Create a form to edit user's password
      * 
      * @return form form
      */
@@ -63,6 +63,7 @@ class AccountController extends Controller
                 ->add('passwordverif', 'password', array (
                     'label' => 'Répéter Mot de passe : '
                 ))
+                ->add('Cancel', 'button')
                 ->add('Modifier', 'submit')
                 ->getForm();
         
@@ -80,5 +81,34 @@ class AccountController extends Controller
         $form = $this->createEditPasswordForm();
         return array('form' => $form->createView());
         //return $this->redirect($this->generateUrl("compte"));
+    }
+    
+    /**
+     * Create a form to edit user's tel number
+     * 
+     * @return form form
+     */
+    private function createEditPhoneForm() {
+        $form = $this->createFormBuilder()
+                ->add('tel', 'text', array(
+                    'label' => 'Téléphone : '
+                ))
+                ->add('Cancel', 'button')
+                ->add('Modifier', 'submit')
+                ->getForm();
+        
+        return $form;
+    }
+    
+    /**
+     * @Route("/compte/edit/phone")
+     * @Template()
+     * 
+     * @param Request $request
+     */
+    public function editPhoneAction(Request $request)
+    {
+        $form = $this->createEditPhoneForm();
+        return array('form' => $form->createView());
     }
 }

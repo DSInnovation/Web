@@ -30,14 +30,14 @@
     <div id="modif_password_window">
         <div class="modif_background">
             <div class="modif_window" id="edit_password">
-                coucou
+                
             </div>
         </div>
     </div>
                     
     <div id="modif_tel_window">
         <div class="modif_background">
-            <div class="modif_window">
+            <div class="modif_window" id="edit_phone">
                 
             </div>
         </div>
@@ -46,9 +46,10 @@
     <script src="{{ asset("bundles/DS/JS/jquery-2.1.3.min.js") }} "></script>
     <script>
         var tempo = (window.screen.height - $('.modif_window').height()) / 4;
-        console.log(tempo);
+        
         $('.modif_window').css('marginTop', tempo + 'px');
         $('#edit_password').load('./compte/edit/password');
+        $('#edit_phone').load('./compte/edit/phone');
 
         $('#modif_password').click(function() {
             $('#modif_password_window').show();
@@ -59,7 +60,7 @@
         });
         
         $('body').keydown(function(event) {
-            if(event.keyCode == 27) {
+            if(event.keyCode === 27) {
                 $('#modif_password_window').hide();
                 $('#modif_tel_window').hide();
             }

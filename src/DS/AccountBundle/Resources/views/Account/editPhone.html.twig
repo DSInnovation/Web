@@ -1,0 +1,23 @@
+<h3>Modification du numéro de téléphone :</h3>
+
+{{ form(form) }}
+
+<script>
+    function checkPhone() {
+        if ( $('#form_tel').val().length < 10 ) {
+            $('#form_Modifier').attr("disabled", true);
+        } else {
+            $('#form_Modifier').attr("disabled", false);
+        }
+    }
+        
+    $('#form_tel').keyup(function() {
+        checkPhone();
+    });
+    
+    $('#form_Modifier').attr("disabled", true);
+    
+    $('#form_Cancel').click(function() {
+        $('#modif_tel_window').hide();
+    });
+</script>
