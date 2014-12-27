@@ -5,9 +5,9 @@
 <script>
     function checkPhone() {
         if ( $('#form_tel').val().length < 10 ) {
-            $('#form_Modifier').attr("disabled", true);
+            $('#form_Editer').attr("disabled", true);
         } else {
-            $('#form_Modifier').attr("disabled", false);
+            $('#form_Editer').attr("disabled", false);
         }
     }
         
@@ -15,9 +15,9 @@
         checkPhone();
     });
     
-    $('#form_Modifier').attr("disabled", true);
-    
-    $('#form_Cancel').click(function() {
+    $('#form_Annuler').click(function() {
         $('#modif_tel_window').hide();
     });
+    
+    $('#form_Editer').attr("disabled", true)
 </script>

@@ -93,8 +93,8 @@ class AccountController extends Controller
                 ->add('tel', 'text', array(
                     'label' => 'Téléphone : '
                 ))
-                ->add('Cancel', 'button')
-                ->add('Modifier', 'submit')
+                ->add('Annuler', 'button')
+                ->add('Editer', 'submit')
                 ->getForm();
         
         return $form;
