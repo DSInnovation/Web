@@ -8,10 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ActivateController extends Controller
 {
     /**
+     * Actiave an account from url
      * @Route(path="/account/validate/{url}", name="validate")
-     * 
      */
-    public function validateAction()
+    public function validateAction($url)
     {
         
     }
