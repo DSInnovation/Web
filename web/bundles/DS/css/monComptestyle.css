@@ -51,7 +51,7 @@ input {
 
 #modif_tel_window form {
     margin-left: 40px;
-    padding-top: 60px;
+    padding-top: 57px;
 }
 
 #modif_password_window h3, #modif_tel_window h3 {
@@ -69,6 +69,7 @@ input {
     height: 250px;
     margin: auto;
     color: black;
+    border: 6px double #c99900;
 }
 
 p {

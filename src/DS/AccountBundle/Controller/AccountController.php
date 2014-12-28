@@ -63,8 +63,12 @@ class AccountController extends Controller
                 ->add('passwordverif', 'password', array (
                     'label' => 'Répéter Mot de passe : '
                 ))
-                ->add('Cancel', 'button')
-                ->add('Modifier', 'submit')
+                ->add('cancel_pass_window', 'button', array(
+                    'label' => 'Cancel'
+                ))
+                ->add('edit_pass_but', 'submit', array(
+                    'label' => 'Modifier'
+                ))
                 ->getForm();
         
         return $form;
@@ -93,8 +97,12 @@ class AccountController extends Controller
                 ->add('tel', 'text', array(
                     'label' => 'Téléphone : '
                 ))
-                ->add('Annuler', 'button')
-                ->add('Editer', 'submit')
+                ->add('cancel_phone_window', 'button', array(
+                    'label' => 'Cancel'
+                ))
+                ->add('edit_phone_but', 'submit', array(
+                    'label' => 'Modifier'
+                ))
                 ->getForm();
         
         return $form;
@@ -110,5 +118,26 @@ class AccountController extends Controller
     {
         $form = $this->createEditPhoneForm();
         return array('form' => $form->createView());
+    }
+    
+    /**
+     * Edit Number Phone in the Database webAccount
+     * 
+     * @param int $number
+     * @return query
+     */
+    public function sendEditPhone($number)
+    {
+        $session = new Session();
+    
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery('
+            UPDATE DSAccountBundle:webAccount
+            SET tel = $number
+            WHERE id = :id
+            ')->setParameters('id', $session->get('id'));
+        
+        return $query;
     }
 }

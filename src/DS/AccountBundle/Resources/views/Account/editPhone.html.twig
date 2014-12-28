@@ -5,9 +5,9 @@
 <script>
     function checkPhone() {
         if ( $('#form_tel').val().length < 10 ) {
-            $('#form_Editer').attr("disabled", true);
+            $('#form_edit_phone_but').attr("disabled", true);
         } else {
-            $('#form_Editer').attr("disabled", false);
+            $('#form_edit_phone_but').attr("disabled", false);
         }
     }
         
@@ -15,9 +15,14 @@
         checkPhone();
     });
     
-    $('#form_Annuler').click(function() {
+    $('#form_cancel_phone_window').click(function() {
         $('#modif_tel_window').hide();
+        $('#form_tel').val("");
     });
     
-    $('#form_Editer').attr("disabled", true)
+    $('#form_edit_phone_but').attr("disabled", true);
+    
+    $('#form_edit_phone_but').click(function() {
+      //  sendEditPhone($('#form_tel').val());
+    });
 </script>
