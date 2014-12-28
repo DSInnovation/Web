@@ -123,21 +123,25 @@ class AccountController extends Controller
     /**
      * Edit Number Phone in the Database webAccount
      * 
-     * @param int $number
+     * @param int $id, int $tel
      * @return query
      */
-    public function sendEditPhone($number)
+    public function sendEditPhone($id, $tel)
     {
-        $session = new Session();
-    
         $em = $this->getDoctrine()->getManager();
-
-        $query = $em->createQuery('
-            UPDATE DSAccountBundle:webAccount
-            SET tel = $number
-            WHERE id = :id
-            ')->setParameters('id', $session->get('id'));
+        $client = $em->getRepository('DSAccountBundle:webAccount')->find($id);
         
-        return $query;
+        if (!$client) {
+            throw $this->createNotFoundException(
+                    'Aucun client ne correspond à cet '.$id
+            );
+        } else {
+            $phone = $em->getRepository('DSAccountBundle:webAccount')->find($tel);
+        }
+
+        $phone->setName('Nouveau numéro de téléphone');
+        $em->flush();
+        
+        return $this->redirect($this->generateUrl('compte'));
     }
 }
